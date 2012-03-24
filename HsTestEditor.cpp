@@ -1,22 +1,25 @@
 #include "HsTestEditor.h"
 
-#include <QtGui/QLabel>
-#include <QtGui/QMenu>
-#include <QtGui/QMenuBar>
-#include <QtGui/QAction>
-
-HsTestEditor::HsTestEditor()
+HsTestEditor::HsTestEditor(QWidget *parent, Qt::WindowFlags flags):
+	QMainWindow(parent, flags), ui(new Ui::MainWindow)
 {
-    QLabel* l = new QLabel( this );
-    l->setText( "Hello World!" );
-    setCentralWidget( l );
-    QAction* a = new QAction(this);
-    a->setText( "Quit" );
-    connect(a, SIGNAL(triggered()), SLOT(close()) );
-    menuBar()->addMenu( "File" )->addAction( a );
+    ui->setupUi(this);
+	
+	QAction *viewDocStruct = ui->dockWidgetStruct->toggleViewAction();
+	QAction *viewDocTask = ui->dockWidgetShowTask->toggleViewAction();
+	ui->menu_4->addAction(viewDocStruct);
+	ui->menu_4->addAction(viewDocTask);
 }
 
 HsTestEditor::~HsTestEditor()
-{}
+{
+	delete ui;
+}
+
+void HsTestEditor::on_actionExit_triggered()
+{
+	close();
+}
+
 
 #include "HsTestEditor.moc"

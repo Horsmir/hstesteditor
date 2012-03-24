@@ -2,13 +2,24 @@
 #define HsTestEditor_H
 
 #include <QtGui/QMainWindow>
+#include "ui_mainwindow.h"
+
+namespace Ui {
+	class MainWindow;
+}
 
 class HsTestEditor : public QMainWindow
 {
 Q_OBJECT
 public:
-    HsTestEditor();
+	explicit HsTestEditor(QWidget *parent = 0, Qt::WindowFlags flags = 0);
     virtual ~HsTestEditor();
+	
+private slots:
+	void on_actionExit_triggered();
+	
+private:
+	Ui::MainWindow *ui;
 };
 
 #endif // HsTestEditor_H
