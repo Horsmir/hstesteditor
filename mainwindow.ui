@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Редактор тестов</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="hstesteditor.qrc">
+    <normaloff>:/icons/hstest.svg</normaloff>:/icons/hstest.svg</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
@@ -37,13 +41,19 @@
      <property name="title">
       <string>&amp;Экспорт</string>
      </property>
+     <property name="icon">
+      <iconset resource="hstesteditor.qrc">
+       <normaloff>:/icons/document-export.png</normaloff>:/icons/document-export.png</iconset>
+     </property>
      <addaction name="actionToText"/>
      <addaction name="actionToPDF"/>
      <addaction name="actionToXML"/>
     </widget>
     <addaction name="actionNewTest"/>
     <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
     <addaction name="separator"/>
+    <addaction name="actionAddTask"/>
     <addaction name="menu_2"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
@@ -58,6 +68,7 @@
      <string>&amp;Справка</string>
     </property>
     <addaction name="actionHelp"/>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_4"/>
@@ -106,7 +117,36 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNewTest"/>
+   <addaction name="actionOpen"/>
+   <addaction name="actionSave"/>
+   <addaction name="separator"/>
+   <addaction name="actionAddTask"/>
+   <addaction name="separator"/>
+   <addaction name="actionToText"/>
+   <addaction name="actionToPDF"/>
+   <addaction name="actionToXML"/>
+   <addaction name="separator"/>
+   <addaction name="actionAbout"/>
+   <addaction name="actionHelp"/>
+   <addaction name="separator"/>
+   <addaction name="actionExit"/>
+  </widget>
   <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="hstesteditor.qrc">
+     <normaloff>:/icons/document-open.png</normaloff>:/icons/document-open.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Открыть...</string>
    </property>
@@ -118,6 +158,10 @@
    </property>
   </action>
   <action name="actionToText">
+   <property name="icon">
+    <iconset resource="hstesteditor.qrc">
+     <normaloff>:/icons/application-x-text.png</normaloff>:/icons/application-x-text.png</iconset>
+   </property>
    <property name="text">
     <string>Текст...</string>
    </property>
@@ -126,6 +170,10 @@
    </property>
   </action>
   <action name="actionToPDF">
+   <property name="icon">
+    <iconset resource="hstesteditor.qrc">
+     <normaloff>:/icons/application-pdf.png</normaloff>:/icons/application-pdf.png</iconset>
+   </property>
    <property name="text">
     <string>PDF...</string>
    </property>
@@ -134,6 +182,10 @@
    </property>
   </action>
   <action name="actionToXML">
+   <property name="icon">
+    <iconset resource="hstesteditor.qrc">
+     <normaloff>:/icons/application-x-xml.png</normaloff>:/icons/application-x-xml.png</iconset>
+   </property>
    <property name="text">
     <string>XML...</string>
    </property>
@@ -142,6 +194,10 @@
    </property>
   </action>
   <action name="actionNewTest">
+   <property name="icon">
+    <iconset resource="hstesteditor.qrc">
+     <normaloff>:/icons/document-new.png</normaloff>:/icons/document-new.png</iconset>
+   </property>
    <property name="text">
     <string>Со&amp;здать...</string>
    </property>
@@ -153,6 +209,10 @@
    </property>
   </action>
   <action name="actionExit">
+   <property name="icon">
+    <iconset resource="hstesteditor.qrc">
+     <normaloff>:/icons/application-exit.png</normaloff>:/icons/application-exit.png</iconset>
+   </property>
    <property name="text">
     <string>В&amp;ыход</string>
    </property>
@@ -161,6 +221,10 @@
    </property>
   </action>
   <action name="actionHelp">
+   <property name="icon">
+    <iconset resource="hstesteditor.qrc">
+     <normaloff>:/icons/help-contents.png</normaloff>:/icons/help-contents.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Помощь...</string>
    </property>
@@ -168,7 +232,42 @@
     <string>F1</string>
    </property>
   </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="hstesteditor.qrc">
+     <normaloff>:/icons/help-about.png</normaloff>:/icons/help-about.png</iconset>
+   </property>
+   <property name="text">
+    <string>О П&amp;рограмме...</string>
+   </property>
+  </action>
+  <action name="actionAddTask">
+   <property name="icon">
+    <iconset resource="hstesteditor.qrc">
+     <normaloff>:/icons/add-task.png</normaloff>:/icons/add-task.png</iconset>
+   </property>
+   <property name="text">
+    <string>До&amp;бавить задание...</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="icon">
+    <iconset resource="hstesteditor.qrc">
+     <normaloff>:/icons/document-save.png</normaloff>:/icons/document-save.png</iconset>
+   </property>
+   <property name="text">
+    <string>Со&amp;хранить</string>
+   </property>
+   <property name="toolTip">
+    <string>Сохранить тест</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="hstesteditor.qrc"/>
+ </resources>
  <connections/>
 </ui>
