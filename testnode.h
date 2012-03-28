@@ -39,58 +39,59 @@ class TestNode : public QObject
 {
 
 public:
-    TestNode();
-    TestNode ( const TestNode& other );
-    TestNode ( int typeNode );
-    virtual ~TestNode();
-    virtual TestNode& operator= ( const TestNode& other );
-    virtual bool operator== ( const TestNode& other ) const;
+	TestNode();
+	TestNode(const TestNode &other);
+	TestNode(int typeNode);
+	virtual ~TestNode();
+	virtual TestNode &operator= (const TestNode &other);
+	virtual bool operator== (const TestNode &other) const;
 
-    void addAnswer ( const QString &answ, qint8 real );
-    void addAnswer ( const QString &answ );
-    void addQuestion ( const QString& quest );
-    
-    void setTaskTest ( const QString& sTask );
-    void setType ( int typeNode );
-    void setQuestion ( const QString& quest );
-    void setReals ( const QString& real );
-    void setRealsInt ( qint8 real );
-    void setAnswers ( const QStringList& answers );
-    void setQuestions ( const QStringList& questions );
-    
-    QString getTask() const;
-    int getType() const;
-    QString getQuestion() const;
-    const QStringList getAnswers() const;
-    qint8 getRealsInt() const;
-    QString getReals() const;
-    QStringList getQuestions() const;
-    
-    bool checkAnswer ( const qint8 &answ ) const;
-    bool checkAnswer ( const QString& answ ) const;
-    bool checkAnswerOpen(const QString &answ) const;
-    
-    void shuffle();
+	void addAnswer(const QString &answ, qint8 real);
+	void addAnswer(const QString &answ);
+	void addQuestion(const QString &quest);
+
+	void setTaskTest(const QString &sTask);
+	void setType(int typeNode);
+	void setQuestion(const QString &quest);
+	void setReals(const QString &real);
+	void setRealsInt(qint8 real);
+	void setAnswers(const QStringList &answers);
+	void setQuestions(const QStringList &questions);
+
+	QString getTask() const;
+	int getType() const;
+	QString getQuestion() const;
+	const QStringList getAnswers() const;
+	qint8 getRealsInt() const;
+	QString getReals() const;
+	QStringList getQuestions() const;
+
+	bool checkAnswer(const qint8 &answ) const;
+	bool checkAnswer(const QString &answ) const;
+	bool checkAnswerOpen(const QString &answ) const;
+
+	void shuffle();
+	void clear();
 
 private:
-    int type;
-    QString task;
-    QString question;
-    QStringList answers;
-    qint8 reals;
-    QString sreals;
-    QStringList questions;
-    
-    void shuffleClose();
-    void shuffleOpen();
-    void shuffleConformity();
-    void shuffleRegulating();
+	int type;
+	QString task;
+	QString question;
+	QStringList answers;
+	qint8 reals;
+	QString sreals;
+	QStringList questions;
+
+	void shuffleClose();
+	void shuffleOpen();
+	void shuffleConformity();
+	void shuffleRegulating();
 };
 
 //===================== Перегруженные операторы =====================================//
 
-QDataStream &operator << ( QDataStream &out, const TestNode &node );
-QDataStream &operator >> ( QDataStream &in, TestNode &node );
+QDataStream &operator << (QDataStream &out, const TestNode &node);
+QDataStream &operator >> (QDataStream &in, TestNode &node);
 
 #endif // TESTNODE_H
-// kate: indent-mode cstyle; indent-width 4; replace-tabs on; 
+// kate: indent-mode cstyle; indent-width 4; replace-tabs off; tab-width 4; 

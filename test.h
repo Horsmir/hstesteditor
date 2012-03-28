@@ -56,6 +56,7 @@ public:
 	bool checkVis();
 	TestNode getNode(int index) const;
 	const TestNode *getNodePtr(int index) const;
+	TestNode *getNodePtrForChange(quint32 index);
 	bool getVis() const;
 	QList<TestNode> getNodeList() const;
 

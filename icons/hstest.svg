@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="481.50964"
+   height="480.20593"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="logo.svg">
+  <title
+     id="title3899">Logo HsTester</title>
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient3755">
+      <stop
+         style="stop-color:#0071ff;stop-opacity:0.80526316;"
+         offset="0"
+         id="stop3757" />
+      <stop
+         style="stop-color:#0000ff;stop-opacity:0;"
+         offset="1"
+         id="stop3759" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.77159747"
+     inkscape:cx="-197.85378"
+     inkscape:cy="235.05362"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1033"
+     inkscape:window-x="-2"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Logo HsTester</dc:title>
+        <dc:date>02.03.2012</dc:date>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Roman Brown</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-sa/3.0/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-sa/3.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#ShareAlike" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-113.70461,-281.02877)">
+    <rect
+       style="fill:#28ddff;fill-opacity:1;stroke:none"
+       id="rect2985"
+       width="480"
+       height="480"
+       x="114.0491"
+       y="281.23471"
+       ry="71.280693" />
+    <text
+       xml:space="preserve"
+       style="font-size:404.98712158px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#daffff;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold"
+       x="383.44003"
+       y="930.82416"
+       id="text3775"
+       sodipodi:linespacing="125%"
+       transform="scale(1.2235461,0.81729655)"><tspan
+         sodipodi:role="line"
+         id="tspan3777"
+         x="383.44003"
+         y="930.82416">T</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:404.98712158px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#daffff;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold"
+       x="-195.95689"
+       y="-343.85165"
+       id="text3775-4"
+       sodipodi:linespacing="125%"
+       transform="scale(-1.2235461,-0.81729655)"><tspan
+         sodipodi:role="line"
+         id="tspan3777-9"
+         x="-195.95689"
+         y="-343.85165">T</tspan></text>
+    <path
+       sodipodi:type="spiral"
+       style="fill:none;stroke:#00b9db;stroke-width:18;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path3109"
+       sodipodi:cx="333.07523"
+       sodipodi:cy="97.882233"
+       sodipodi:expansion="1"
+       sodipodi:revolution="3"
+       sodipodi:radius="84.916023"
+       sodipodi:argument="-17.557058"
+       sodipodi:t0="0"
+       d="m 333.07523,97.882233 c 1.16963,4.093737 -4.94123,3.596357 -6.80407,1.944012 -5.04819,-4.477743 -1.87616,-12.367959 2.91604,-15.552148 8.57213,-5.695765 19.82312,-0.670358 24.30023,7.776098 6.57033,12.395515 -0.51574,27.399455 -12.63615,33.048305 -16.15461,7.52904 -35.02143,-1.69011 -41.79639,-17.4962 -8.5256,-19.890357 2.85775,-42.665791 22.35626,-50.544473 23.61531,-9.54214 50.32289,4.021364 59.29255,27.216318 10.57043,27.334445 -5.18243,57.987955 -32.07637,68.040625 -31.05013,11.60621 -65.65834,-6.34179 -76.78871,-36.93642 -12.64703,-34.763577 7.49997,-73.332454 41.79648,-85.536793 38.4755,-13.691424 81.00927,8.657296 94.28487,46.656538 14.73843,42.186365 -9.81399,88.688135 -51.51659,103.032945"
+       transform="matrix(0.91339331,0.40707819,-0.40707819,0.91339331,194.02473,164.4204)" />
+    <path
+       sodipodi:type="spiral"
+       style="fill:none;stroke:#00b9db;stroke-width:18;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path3109-9"
+       sodipodi:cx="333.07523"
+       sodipodi:cy="97.882233"
+       sodipodi:expansion="1"
+       sodipodi:revolution="3"
+       sodipodi:radius="84.916023"
+       sodipodi:argument="-17.557058"
+       sodipodi:t0="0"
+       d="m 333.07523,97.882233 c 1.16963,4.093737 -4.94123,3.596357 -6.80407,1.944012 -5.04819,-4.477743 -1.87616,-12.367959 2.91604,-15.552148 8.57213,-5.695765 19.82312,-0.670358 24.30023,7.776098 6.57033,12.395515 -0.51574,27.399455 -12.63615,33.048305 -16.15461,7.52904 -35.02143,-1.69011 -41.79639,-17.4962 -8.5256,-19.890357 2.85775,-42.665791 22.35626,-50.544473 23.61531,-9.54214 50.32289,4.021364 59.29255,27.216318 10.57043,27.334445 -5.18243,57.987955 -32.07637,68.040625 -31.05013,11.60621 -65.65834,-6.34179 -76.78871,-36.93642 -12.64703,-34.763577 7.49997,-73.332454 41.79648,-85.536793 38.4755,-13.691424 81.00927,8.657296 94.28487,46.656538 14.73843,42.186365 -9.81399,88.688135 -51.51659,103.032945"
+       transform="matrix(-0.91339331,-0.40707819,0.40707819,-0.91339331,510.86047,875.35245)" />
+  </g>
+</svg>

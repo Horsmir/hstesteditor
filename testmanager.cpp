@@ -49,8 +49,6 @@ void TestManager::openTest(const QString &testFileName)
 	quint32 magic;
 	quint16 version;
 	
-	saveTest();
-	
 	QFile file(testFileName);
 	if(!file.exists())
 	{
@@ -76,14 +74,16 @@ void TestManager::openTest(const QString &testFileName)
 		return;
 	}
 	
-	in >> test;
-	delete currentTest;
+	if(currentTest == 0)
+		currentTest = new Test(this);
+	in >> *currentTest;
 	currentTestFileName = testFileName;
-	currentTest = &test;
 }
 
 void TestManager::saveTest()
 {
+	if(currentTestFileName.isEmpty())
+		return;
 	QFile file(currentTestFileName);
 	if(!file.open(QIODevice::WriteOnly))
 	{
@@ -94,4 +94,39 @@ void TestManager::saveTest()
 	QDataStream out(&file);
 	out << quint32(magicNumber) << quint16(out.version());
 	out << *currentTest;
+}
+
+quint32 TestManager::getCount() const
+{
+	return currentTest->getCount();
+}
+
+const TestNode *TestManager::getNodeById(quint32 index) const
+{
+	return currentTest->getNodePtr(index);
+}
+
+QString TestManager::getTestAuthor() const
+{
+	return currentTest->getAuthor();
+}
+
+QString TestManager::getTestCreateDate() const
+{
+	return currentTest->getCreateDate().toString("dd.MM.yyyy");
+}
+
+QString TestManager::getTestName() const
+{
+	return currentTest->getName();
+}
+
+void TestManager::addTestNode(TestNode testNode)
+{
+	currentTest->addNode(testNode);
+}
+
+TestNode *TestManager::getNodeForChange(quint32 index)
+{
+	return currentTest->getNodePtrForChange(index);
 }

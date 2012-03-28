@@ -336,6 +336,8 @@ void Test::setNodeList(const QList< TestNode >& nodeList)
 
 const TestNode *Test::getNodePtr(int index) const
 {
+	if(index >= nodeList.count())
+		return 0;
 	return &(nodeList[index]);
 }
 
@@ -343,6 +345,13 @@ void Test::shuffle()
 {
 	for(int i = 0; i < nodeList.count(); i++)
 		nodeList[i].shuffle();
+}
+
+TestNode *Test::getNodePtrForChange(quint32 index)
+{
+	if(index >= nodeList.count())
+		return 0;
+	return &(nodeList[index]);
 }
 
 //===============================================================================================//

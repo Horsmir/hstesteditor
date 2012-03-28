@@ -17,40 +17,35 @@
 */
 
 
-#ifndef TESTMANAGER_H
-#define TESTMANAGER_H
+#ifndef DLGCREATETEST_H
+#define DLGCREATETEST_H
 
-#include <QtCore/QDebug>
-#include <QtCore/QObject>
-#include <QtCore/QFile>
-#include "test.h"
-#include "testnode.h"
+#include <QtGui/QDialog>
+#include <QtCore/QDir>
+#include <QtGui/QFileDialog>
+#include "ui_dlgcreatetest.h"
 
+namespace Ui {
+	class DlgCreateTest;
+}
 
-class TestManager : public QObject
+class DlgCreateTest : public QDialog
 {
-
+	Q_OBJECT
+	
 public:
-	explicit TestManager(QObject *parent = 0);
-	virtual ~TestManager();
+	explicit DlgCreateTest(QWidget *parent = 0, Qt::WindowFlags f = 0);
+	virtual ~DlgCreateTest();
 	
-	void createTest(const QString &testName, const QString &testAuthor, const QString &testFileName);
-	void openTest(const QString &testFileName);
-	void saveTest();
-	
-	void addTestNode(TestNode testNode);
-	
-	quint32 getCount() const;
-	const TestNode *getNodeById(quint32 index) const;
-	TestNode *getNodeForChange(quint32 index);
 	QString getTestName() const;
-	QString getTestAuthor() const;
-	QString getTestCreateDate() const;
+	QString getTestDir() const;
+	QString getAuthor() const;
+	
+private slots:
+	void on_toolBtnTestDir_clicked();
 	
 private:
-	Test *currentTest;
-	QString currentTestFileName;
-	quint32 magicNumber;
+	Ui::DlgCreateTest *ui;
 };
 
-#endif // TESTMANAGER_H
+#endif // DLGCREATETEST_H
