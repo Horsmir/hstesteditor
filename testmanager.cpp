@@ -130,3 +130,73 @@ TestNode *TestManager::getNodeForChange(quint32 index)
 {
 	return currentTest->getNodePtrForChange(index);
 }
+
+void TestManager::testToText(const QString &textFileName)
+{
+	QFile file(textFileName);
+	if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
+	{
+		qDebug() << "Can't open file " << textFileName << " " << file.errorString();
+		return;
+	}
+	
+	QTextStream out(&file);
+	out << "F1: ";
+	out << currentTest->getName() << "\n";
+	out << "F2: ";
+	out << currentTest->getAuthor() << "\n";
+	out << "F3: ";
+	out << getTestCreateDate() << "\n";
+	
+	for(int i = 0; i < currentTest->getCount(); i++)
+	{
+		TestNode node = currentTest->getNode(i);
+		out << "I:\n";
+		out << "Q: " << node.getTask() << "\n";
+		switch(node.getType())
+		{
+			case TYPE_NODE_CLOSE:
+				out << "S: " << node.getQuestion() << "\n";
+				for(int j = 0; j < node.getAnswers().count(); j++)
+				{
+					int ransw = int(node.getRealsInt()) & int(qPow(2, j));
+					if(ransw == 0)
+					{
+						out << "-: " << node.getAnswers().at(j) << "\n";
+					}
+					else
+					{
+						out << "+: " << node.getAnswers().at(j) << "\n";
+					}
+				}
+				break;
+			case TYPE_NODE_OPEN:
+				out << "S: " << node.getQuestion() << "\n";
+				for(int j = 0; j < node.getAnswers().count(); j++)
+				{
+					out << "+: " << node.getAnswers().at(j) << "\n";
+				}
+				break;
+			case TYPE_NODE_CONFORMITY:
+				for(int j = 0; j < node.getAnswers().count(); j++)
+				{
+					if(j < node.getQuestions().count())
+						out << "L" << (j + 1) << ": " << node.getQuestions().at(j) << "\n";
+		
+					int p = QString(node.getReals().at(j)).toInt() - 1;
+					if(p == -1)
+						p = node.getAnswers().count() - 1;
+		
+					out << "R" << (j + 1) << ": " << node.getAnswers().at(p) << "\n";
+				}
+				break;
+			case TYPE_NODE_REGULATING:
+				for(int j = 0; j < node.getAnswers().count(); j++)
+				{
+					int p = QString(node.getReals().at(j)).toInt() - 1;
+					out << (j + 1) << ": " << node.getAnswers().at(p) << "\n";
+				}
+				break;
+		}
+	}
+}

@@ -3,10 +3,12 @@
 
 #include <QtGui/QMainWindow>
 #include <QtGui/QMessageBox>
+#include <QtGui/QPrinter>
 #include "ui_mainwindow.h"
 #include "testmanager.h"
 #include "dlgcreatetest.h"
 #include "dlgaddtask.h"
+#include "htmltemplate.h"
 
 namespace Ui
 {
@@ -17,7 +19,7 @@ class HsTestEditor : public QMainWindow
 {
 	Q_OBJECT
 public:
-	explicit HsTestEditor(QWidget *parent = 0, Qt::WindowFlags flags = 0);
+	explicit HsTestEditor(const QString & testFilePath = "", QWidget *parent = 0, Qt::WindowFlags flags = 0);
 	virtual ~HsTestEditor();
 
 private slots:
@@ -28,16 +30,22 @@ private slots:
 	void on_actionAddTask_triggered();
 	void on_actionSave_triggered();
 	void on_twStruct_itemDoubleClicked(QTreeWidgetItem * item, int column);
+	void on_twStruct_itemClicked(QTreeWidgetItem * item, int column);
+	void on_actionToPDF_triggered();
+	void on_actionToText_triggered();
 
 private:
 	Ui::MainWindow *ui;
 	QString appName;
+	QString testFilePath;
 	QTreeWidgetItem *root;
 	TestManager *testManager;
 	DlgCreateTest *createTestDialog;
 	DlgAddTask *addTaskDialog;
+	HtmlTemplate *htmlTemplate;
 	
 	void showTree();
+	void showTest();
 };
 
 #endif // HsTestEditor_H

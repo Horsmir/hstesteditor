@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Hs Test Editor
+Name[ru]=Редактор тестов
+GenericName=Application for edit tests
+GenericName[ru]=Редактирование тестов
+Terminal=false
+Exec=hstesteditor
+Icon=hstesteditor
+Categories=Education;Qt;

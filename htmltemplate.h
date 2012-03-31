@@ -17,42 +17,23 @@
 */
 
 
-#ifndef TESTMANAGER_H
-#define TESTMANAGER_H
+#ifndef HTMLTEMPLATE_H
+#define HTMLTEMPLATE_H
 
-#include <QtCore/QDebug>
 #include <QtCore/QObject>
-#include <QtCore/QFile>
-#include <QtCore/qmath.h>
-#include "test.h"
-#include "testnode.h"
+#include <QtCore/QMap>
 
 
-class TestManager : public QObject
+class HtmlTemplate : public QObject
 {
-
 public:
-	explicit TestManager(QObject *parent = 0);
-	virtual ~TestManager();
+	explicit HtmlTemplate(QObject *parent = 0);
+	virtual ~HtmlTemplate();
 	
-	void createTest(const QString &testName, const QString &testAuthor, const QString &testFileName);
-	void openTest(const QString &testFileName);
-	void saveTest();
-	
-	void addTestNode(TestNode testNode);
-	
-	quint32 getCount() const;
-	const TestNode *getNodeById(quint32 index) const;
-	TestNode *getNodeForChange(quint32 index);
-	QString getTestName() const;
-	QString getTestAuthor() const;
-	QString getTestCreateDate() const;
-	void testToText(const QString &textFileName);
+	QString getTemplate(const QString &name) const;
 	
 private:
-	Test *currentTest;
-	QString currentTestFileName;
-	quint32 magicNumber;
+	QMap<QString, QString>  templates;
 };
 
-#endif // TESTMANAGER_H
+#endif // HTMLTEMPLATE_H

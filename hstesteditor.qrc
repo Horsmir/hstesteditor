@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="/">
+    <file>icons/chboff.png</file>
+    <file>icons/chbon.png</file>
     <file>icons/dialog-ok-apply.png</file>
     <file>icons/edit-delete.png</file>
     <file>icons/edit-create.png</file>
@@ -9,8 +11,8 @@
     <file>icons/application-x-text.png</file>
     <file>icons/application-x-xml.png</file>
     <file>icons/document-export.png</file>
-    <file>icons/hstest.svg</file>
     <file>icons/help-contents.png</file>
+    <file>icons/hstesteditor.png</file>
     <file>icons/help-about.png</file>
     <file>icons/application-exit.png</file>
     <file>icons/configure.png</file>

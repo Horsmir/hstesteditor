@@ -1,6 +1,6 @@
 #include "HsTestEditor.h"
 
-HsTestEditor::HsTestEditor(QWidget *parent, Qt::WindowFlags flags):
+HsTestEditor::HsTestEditor(const QString &testFilePath, QWidget *parent, Qt::WindowFlags flags):
 	QMainWindow(parent, flags), ui(new Ui::MainWindow), root(0)
 {
 	ui->setupUi(this);
@@ -18,6 +18,19 @@ HsTestEditor::HsTestEditor(QWidget *parent, Qt::WindowFlags flags):
 	testManager = new TestManager(this);
 	createTestDialog = new DlgCreateTest(this);
 	addTaskDialog = new DlgAddTask(this);
+	
+	htmlTemplate = new HtmlTemplate(this);
+	
+	this->testFilePath = testFilePath;
+	if(!this->testFilePath.isEmpty())
+	{
+		testManager->openTest(this->testFilePath);
+		showTree();
+		showTest();
+	}
+	
+	ui->actionHelp->setDisabled(true);
+	ui->actionToXML->setDisabled(true);
 }
 
 HsTestEditor::~HsTestEditor()
@@ -34,10 +47,10 @@ void HsTestEditor::on_actionAbout_triggered()
 {
 	QString str1, str2, str3, str4;
 	
-	str1 = trUtf8("<h2>%1</h2><p>Программа <b>%1</b> предназначена для тестирования учеников, студентов и сотрудников учреждений.</p><p>Copyright &copy;  2012 Роман Браун</p><p>Icons: Copyright &copy; <a href=\"http://kde-look.org/usermanager/search.php?username=frag\">frag F-L</a>").arg(appName);
+	str1 = trUtf8("<h2>%1 0.1</h2><p><b>%1</b> предназначен для создания, редактирования, просмотра тестов.</p><p>Copyright &copy;  2012 Роман Браун</p><p>Icons: Copyright &copy; <a href=\"http://kde-look.org/usermanager/search.php?username=frag\">frag F-L</a>").arg(appName);
 	str2 = trUtf8("<p>Это программа является свободным программным обеспечением. Вы можете распространять и/или модифицировать её согласно условиям Стандартной Общественной Лицензии GNU, опубликованной Фондом Свободного Программного Обеспечения, версии 3 или, по Вашему желанию, любой более поздней версии.</p>");
 	str3 = trUtf8("<p>Эта программа распространяется в надежде, что она будет полезной, но БЕЗ ВСЯКИХ ГАРАНТИЙ, в том числе подразумеваемых гарантий ТОВАРНОГО СОСТОЯНИЯ ПРИ ПРОДАЖЕ и ГОДНОСТИ ДЛЯ ОПРЕДЕЛЁННОГО ПРИМЕНЕНИЯ. Смотрите Стандартную Общественную Лицензию GNU для получения дополнительной информации.</p>");
-	str4 = trUtf8("<p>Вы должны были получить копию Стандартной Общественной Лицензии GNU вместе с программой. В случае её отсутствия, посмотрите <a href=\"http://www.gnu.org/licenses/\">http://www.gnu.org/licenses/</a>.</p><p>E-Mail: <a href=\"mailto:firdragon76@gmail.com\">firdragon76@gmail.com</a><br>Сайт программы: <a href=\"github.com/Horsmir/hstesteditor\">github.com/Horsmir/hstest</a></p>");
+	str4 = trUtf8("<p>Вы должны были получить копию Стандартной Общественной Лицензии GNU вместе с программой. В случае её отсутствия, посмотрите <a href=\"http://www.gnu.org/licenses/\">http://www.gnu.org/licenses/</a>.</p><p>E-Mail: <a href=\"mailto:firdragon76@gmail.com\">firdragon76@gmail.com</a><br>Сайт программы: <a href=\"github.com/Horsmir/hstesteditor\">github.com/Horsmir/hstesteditor</a></p>");
 	
 	QMessageBox::about(this, trUtf8("О программе"), str1 + str2 + str3 + str4);
 }
@@ -50,6 +63,7 @@ void HsTestEditor::on_actionNewTest_triggered()
 		testManager->createTest(createTestDialog->getTestName(), createTestDialog->getAuthor(), testFilePath);
 		
 		showTree();
+		showTest();
 	}
 }
 
@@ -59,11 +73,12 @@ void HsTestEditor::on_actionOpen_triggered()
 	options |= QFileDialog::DontUseNativeDialog;
 	QString filter;
 	
-	QString testFilePath = QFileDialog::getOpenFileName(this, trUtf8("Открыть файл с тестом"), "", trUtf8("Файлы с тестами (*tst);;Все файлы (*.*)"), &filter, options);
+	testFilePath = QFileDialog::getOpenFileName(this, trUtf8("Открыть файл с тестом"), "", trUtf8("Файлы с тестами (*tst);;Все файлы (*.*)"), &filter, options);
 	if(!testFilePath.isEmpty())
 	{
 		testManager->openTest(testFilePath);
 		showTree();
+		showTest();
 	}
 }
 
@@ -75,6 +90,7 @@ void HsTestEditor::on_actionAddTask_triggered()
 	{
 		testManager->addTestNode(node);
 		showTree();
+		showTest();
 	}
 }
 
@@ -104,7 +120,153 @@ void HsTestEditor::on_twStruct_itemDoubleClicked(QTreeWidgetItem *item, int colu
 	QString strid = item->text(0);
 	addTaskDialog->setNode(testManager->getNodeForChange(strid.toUInt() - 1));
 	addTaskDialog->setEdit(true);
-	addTaskDialog->exec();
+	if(addTaskDialog->exec() == QDialog::Accepted)
+		showTest();
+}
+
+void HsTestEditor::on_twStruct_itemClicked(QTreeWidgetItem *item, int column)
+{
+	const TestNode *node = testManager->getNodeById(item->text(0).toUInt() - 1);
+	QString content = "", tmp = "", tmp_quest = "";
+	int ransw = 0;
+	
+	switch(node->getType())
+	{
+		case TYPE_NODE_CLOSE:
+			for(int i = 0; i < node->getAnswers().count(); i++)
+			{
+				ransw = int(node->getRealsInt()) & int(qPow(2, i));
+				if(ransw == 0)
+				{
+					tmp += htmlTemplate->getTemplate("closeTestAnswOff").arg(node->getAnswers().at(i));
+				}
+				else
+				{
+					tmp += htmlTemplate->getTemplate("closeTestAnswOn").arg(node->getAnswers().at(i));
+				}
+			}
+			content += htmlTemplate->getTemplate("closeTest").arg(item->text(0).toUInt()).arg(node->getTask()).arg(node->getQuestion()).arg(tmp);
+			break;
+		case TYPE_NODE_OPEN:
+			content += htmlTemplate->getTemplate("openTest").arg(item->text(0).toUInt()).arg(node->getTask()).arg(node->getQuestion()).arg(node->getAnswers().at(0));
+			break;
+		case TYPE_NODE_CONFORMITY:
+			for(int i = 0; i < node->getAnswers().count(); i++)
+			{
+				if(i >= node->getQuestions().count())
+					tmp_quest = "";
+				else
+					tmp_quest = node->getQuestions().at(i);
+		
+				int p = QString(node->getReals().at(i)).toInt() - 1;
+				if(p == -1)
+					p = node->getAnswers().count() - 1;
+		
+				tmp += htmlTemplate->getTemplate("conformityTestAnsw").arg(tmp_quest).arg(node->getAnswers().at(p));
+			}
+			content += htmlTemplate->getTemplate("conformityTest").arg(item->text(0).toUInt()).arg(node->getTask()).arg(tmp);
+			break;
+		case TYPE_NODE_REGULATING:
+			for(int i = 0; i < node->getAnswers().count(); i++)
+			{
+				int p = QString(node->getReals().at(i)).toInt() - 1;
+				tmp += htmlTemplate->getTemplate("regulatingTestsAnsw").arg(node->getAnswers().at(p));
+			}
+			content += htmlTemplate->getTemplate("regulatingTests").arg(item->text(0).toUInt()).arg(node->getTask()).arg(tmp);
+			break;
+	}
+	ui->teTask->clear();
+	ui->teTask->setHtml(content);
+}
+
+void HsTestEditor::showTest()
+{
+	QString content = htmlTemplate->getTemplate("head").arg(testManager->getTestName()).arg(testManager->getTestAuthor()).arg(testManager->getTestCreateDate());
+	QString tmp_quest, tmp;
+	
+	for(int i = 0; i < testManager->getCount(); i++)
+	{
+		tmp = tmp_quest = "";
+		const TestNode *node = testManager->getNodeById(i);
+		switch(node->getType())
+		{
+			case TYPE_NODE_CLOSE:
+				for(int j = 0; j < node->getAnswers().count(); j++)
+				{
+					int ransw = int(node->getRealsInt()) & int(qPow(2, j));
+					if(ransw == 0)
+					{
+						tmp += htmlTemplate->getTemplate("closeTestAnswOff").arg(node->getAnswers().at(j));
+					}
+					else
+					{
+						tmp += htmlTemplate->getTemplate("closeTestAnswOn").arg(node->getAnswers().at(j));
+					}
+				}
+				content += htmlTemplate->getTemplate("closeTest").arg(i + 1).arg(node->getTask()).arg(node->getQuestion()).arg(tmp);
+				break;
+			case TYPE_NODE_OPEN:
+				content += htmlTemplate->getTemplate("openTest").arg(i + 1).arg(node->getTask()).arg(node->getQuestion()).arg(node->getAnswers().at(0));
+				break;
+			case TYPE_NODE_CONFORMITY:
+				for(int j = 0; j < node->getAnswers().count(); j++)
+				{
+					if(j >= node->getQuestions().count())
+						tmp_quest = "";
+					else
+						tmp_quest = node->getQuestions().at(j);
+		
+					int p = QString(node->getReals().at(j)).toInt() - 1;
+					if(p == -1)
+						p = node->getAnswers().count() - 1;
+		
+					tmp += htmlTemplate->getTemplate("conformityTestAnsw").arg(tmp_quest).arg(node->getAnswers().at(p));
+				}
+				content += htmlTemplate->getTemplate("conformityTest").arg(i + 1).arg(node->getTask()).arg(tmp);
+				break;
+			case TYPE_NODE_REGULATING:
+				for(int j = 0; j < node->getAnswers().count(); j++)
+				{
+					int p = QString(node->getReals().at(j)).toInt() - 1;
+					tmp += htmlTemplate->getTemplate("regulatingTestsAnsw").arg(node->getAnswers().at(p));
+				}
+				content += htmlTemplate->getTemplate("regulatingTests").arg(i + 1).arg(node->getTask()).arg(tmp);
+				break;
+		}
+	}
+	content += htmlTemplate->getTemplate("end");
+	ui->teTest->clear();
+	ui->teTest->setHtml(content);	
+}
+
+void HsTestEditor::on_actionToPDF_triggered()
+{
+	QFileDialog::Options options;
+	options |= QFileDialog::DontUseNativeDialog;
+	QString filter;
+	
+	QString pdfFilePath = QFileDialog::getSaveFileName(this, trUtf8("Экспорт в PDF"), QDir::homePath(), trUtf8("Файлы PDF (*pdf);;Все файлы (*.*)"), &filter, options);
+	if(!pdfFilePath.isEmpty())
+	{
+		QPrinter printer;
+		printer.setOutputFormat(QPrinter::PdfFormat);
+		printer.setOutputFileName(pdfFilePath);
+	
+		ui->teTest->print(&printer);
+	}
+}
+
+void HsTestEditor::on_actionToText_triggered()
+{
+	QFileDialog::Options options;
+	options |= QFileDialog::DontUseNativeDialog;
+	QString filter;
+	
+	QString textFilePath = QFileDialog::getSaveFileName(this, trUtf8("Экспорт в текст"), QDir::homePath(), trUtf8("Текстовые файлы (*txt);;Все файлы (*.*)"), &filter, options);
+	if(!textFilePath.isEmpty())
+	{
+		testManager->testToText(textFilePath);
+	}
 }
 
 #include "HsTestEditor.moc"
