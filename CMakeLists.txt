@@ -1,5 +1,11 @@
 project(HsTestEditor)
 cmake_minimum_required(VERSION 2.6)
+
+if(CMAKE_CROSSCOMPILING)
+  set(QT_HEADERS_DIR "/usr/i486-mingw32/include")
+  set(QT_LIBRARY_DIR "/usr/i486-mingw32/lib")
+endif(CMAKE_CROSSCOMPILING)
+
 find_package(Qt4 REQUIRED)
 
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
