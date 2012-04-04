@@ -18,6 +18,7 @@ HsTestEditor::HsTestEditor(const QString &testFilePath, QWidget *parent, Qt::Win
 	testManager = new TestManager(this);
 	createTestDialog = new DlgCreateTest(this);
 	addTaskDialog = new DlgAddTask(this);
+	findDialog = new DlgFind(this);
 	
 	htmlTemplate = new HtmlTemplate(this);
 	
@@ -31,6 +32,9 @@ HsTestEditor::HsTestEditor(const QString &testFilePath, QWidget *parent, Qt::Win
 	
 	ui->actionHelp->setDisabled(true);
 	ui->actionToXML->setDisabled(true);
+	
+	connect(findDialog, SIGNAL(findNext(QString,Qt::CaseSensitivity)), SLOT(findTextNext(QString,Qt::CaseSensitivity)));
+	connect(findDialog, SIGNAL(findPrev(QString,Qt::CaseSensitivity)), SLOT(findTextPrev(QString,Qt::CaseSensitivity)));
 }
 
 HsTestEditor::~HsTestEditor()
@@ -267,6 +271,28 @@ void HsTestEditor::on_actionToText_triggered()
 	{
 		testManager->testToText(textFilePath);
 	}
+}
+
+void HsTestEditor::on_actionFind_triggered()
+{
+	findDialog->show();
+}
+
+void HsTestEditor::findTextNext(const QString &str, Qt::CaseSensitivity cs)
+{
+	QTextDocument::FindFlags options;
+	if(cs == Qt::CaseSensitive)
+		options |= QTextDocument::FindCaseSensitively;
+	ui->teTest->find(str, options);
+}
+
+void HsTestEditor::findTextPrev(const QString &str, Qt::CaseSensitivity cs)
+{
+	QTextDocument::FindFlags options;
+	options |= QTextDocument::FindBackward;
+	if(cs == Qt::CaseSensitive)
+		options |= QTextDocument::FindCaseSensitively;
+	ui->teTest->find(str, options);
 }
 
 #include "HsTestEditor.moc"

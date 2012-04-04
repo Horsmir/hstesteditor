@@ -74,7 +74,14 @@
     <addaction name="actionHelp"/>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>Пр&amp;авка</string>
+    </property>
+    <addaction name="actionFind"/>
+   </widget>
    <addaction name="menu"/>
+   <addaction name="menu_3"/>
    <addaction name="menu_4"/>
    <addaction name="menu_5"/>
   </widget>
@@ -143,6 +150,8 @@
    <addaction name="separator"/>
    <addaction name="actionAbout"/>
    <addaction name="actionHelp"/>
+   <addaction name="separator"/>
+   <addaction name="actionFind"/>
    <addaction name="separator"/>
    <addaction name="actionExit"/>
   </widget>
@@ -267,6 +276,18 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionFind">
+   <property name="icon">
+    <iconset resource="hstesteditor.qrc">
+     <normaloff>:/icons/edit-find.png</normaloff>:/icons/edit-find.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Найти...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
    </property>
   </action>
  </widget>

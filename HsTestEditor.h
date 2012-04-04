@@ -9,6 +9,7 @@
 #include "dlgcreatetest.h"
 #include "dlgaddtask.h"
 #include "htmltemplate.h"
+#include "dlgfind.h"
 
 namespace Ui
 {
@@ -33,6 +34,10 @@ private slots:
 	void on_twStruct_itemClicked(QTreeWidgetItem * item, int column);
 	void on_actionToPDF_triggered();
 	void on_actionToText_triggered();
+	void on_actionFind_triggered();
+	
+	void findTextNext(const QString &str, Qt::CaseSensitivity cs);
+	void findTextPrev(const QString &str, Qt::CaseSensitivity cs);
 
 private:
 	Ui::MainWindow *ui;
@@ -42,6 +47,7 @@ private:
 	TestManager *testManager;
 	DlgCreateTest *createTestDialog;
 	DlgAddTask *addTaskDialog;
+	DlgFind *findDialog;
 	HtmlTemplate *htmlTemplate;
 	
 	void showTree();

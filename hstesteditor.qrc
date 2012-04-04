@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/">
+    <file>icons/edit-find.png</file>
     <file>icons/chboff.png</file>
     <file>icons/chbon.png</file>
     <file>icons/dialog-ok-apply.png</file>
