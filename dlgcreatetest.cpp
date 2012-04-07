@@ -57,4 +57,14 @@ void DlgCreateTest::on_toolBtnTestDir_clicked()
 		ui->leTestDir->setText(testDir);
 }
 
+void DlgCreateTest::setAuthor(const QString &author)
+{
+	ui->leAuthor->setText(author);
+}
+
+void DlgCreateTest::setDir(const QString &dir)
+{
+	ui->leTestDir->setText(dir);
+}
+
 #include "dlgcreatetest.moc"

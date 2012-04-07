@@ -19,6 +19,7 @@ HsTestEditor::HsTestEditor(const QString &testFilePath, QWidget *parent, Qt::Win
 	createTestDialog = new DlgCreateTest(this);
 	addTaskDialog = new DlgAddTask(this);
 	findDialog = new DlgFind(this);
+	settingDialog = new DlgSetting(this);
 	
 	htmlTemplate = new HtmlTemplate(this);
 	
@@ -31,7 +32,9 @@ HsTestEditor::HsTestEditor(const QString &testFilePath, QWidget *parent, Qt::Win
 	}
 	
 	ui->actionHelp->setDisabled(true);
-	ui->actionToXML->setDisabled(true);
+	
+	settings = new QSettings(QSettings::NativeFormat, QSettings::UserScope, "HsTest", "hstesteditor");
+	readSettings();
 	
 	connect(findDialog, SIGNAL(findNext(QString,Qt::CaseSensitivity)), SLOT(findTextNext(QString,Qt::CaseSensitivity)));
 	connect(findDialog, SIGNAL(findPrev(QString,Qt::CaseSensitivity)), SLOT(findTextPrev(QString,Qt::CaseSensitivity)));
@@ -61,6 +64,8 @@ void HsTestEditor::on_actionAbout_triggered()
 
 void HsTestEditor::on_actionNewTest_triggered()
 {
+	createTestDialog->setAuthor(defaultAuthor);
+	createTestDialog->setDir(defaultProjectDirPath);
 	if(createTestDialog->exec() == QDialog::Accepted)
 	{
 		QString testFilePath = createTestDialog->getTestDir() + "/" + createTestDialog->getTestName() + ".tst";
@@ -112,6 +117,14 @@ void HsTestEditor::showTree()
 		item->setText(0, QString("%1").arg(i + 1));
 		root->addChild(item);
 	}
+	
+	ui->actionAddTask->setEnabled(true);
+	ui->actionFind->setEnabled(true);
+	ui->actionSave->setEnabled(true);
+	ui->actionToPDF->setEnabled(true);
+	ui->actionToText->setEnabled(true);
+	ui->actionSaveAs->setEnabled(true);
+	//ui->actionToXML->setEnabled(true);
 }
 
 void HsTestEditor::on_actionSave_triggered()
@@ -293,6 +306,61 @@ void HsTestEditor::findTextPrev(const QString &str, Qt::CaseSensitivity cs)
 	if(cs == Qt::CaseSensitive)
 		options |= QTextDocument::FindCaseSensitively;
 	ui->teTest->find(str, options);
+}
+
+void HsTestEditor::on_actionSaveAs_triggered()
+{
+	QFileDialog::Options options;
+	options |= QFileDialog::DontUseNativeDialog;
+	QString filter;
+	
+	QString textFilePath = QFileDialog::getSaveFileName(this, trUtf8("Сохранить тест как..."), QDir::homePath(), trUtf8("Тестовые файлы (*tst);;Все файлы (*.*)"), &filter, options);
+	if(!textFilePath.isEmpty())
+	{
+		testManager->saveTest(textFilePath);
+	}
+}
+
+void HsTestEditor::readSettings()
+{
+	defaultAuthor = settings->value("General/Author", QString("")).toString();
+	defaultProjectDirPath = settings->value("General/ProjectDirPath", QString(QDir::homePath())).toString();
+	ui->dockWidgetStruct->setVisible(settings->value("View/ShowStruct", bool(true)).toBool());
+	ui->dockWidgetShowTask->setVisible(settings->value("View/ShowTask", bool(true)).toBool());
+	ui->toolBar->setVisible(settings->value("View/ShowToolBar", bool(true)).toBool());
+	appStyle = settings->value("View/Style" , QString("default")).toString();
+	qApp->setStyle(appStyle);
+}
+
+void HsTestEditor::writeSettings()
+{
+	settings->setValue("General/Author", defaultAuthor);
+	settings->setValue("General/ProjectDirPath", defaultProjectDirPath);
+	settings->setValue("View/ShowStruct", ui->dockWidgetStruct->isVisible());
+	settings->setValue("View/ShowTask", ui->dockWidgetShowTask->isVisible());
+	settings->setValue("View/ShowToolBar", ui->toolBar->isVisible());
+	settings->setValue("View/Style", appStyle);
+}
+
+void HsTestEditor::closeEvent(QCloseEvent *event)
+{
+	writeSettings();
+	QWidget::closeEvent(event);
+}
+
+void HsTestEditor::on_actionSetting_triggered()
+{
+	settingDialog->setAuthor(defaultAuthor);
+	settingDialog->setDir(defaultProjectDirPath);
+	settingDialog->setTheme(appStyle);
+	if(settingDialog->exec() == QDialog::Accepted)
+	{
+		defaultAuthor = settingDialog->getAuthor();
+		defaultProjectDirPath = settingDialog->getDir();
+		appStyle = settingDialog->getTheme();
+		qApp->setStyle(appStyle);
+		writeSettings();
+	}
 }
 
 #include "HsTestEditor.moc"

@@ -119,8 +119,8 @@ void DlgAddTask::setCloseNode()
 	for(int i = 0; i < ui->lwCloseAnswers->count(); i++)
 	{
 		QString tmp = ui->lwCloseAnswers->item(i)->text();
-		QChar f = tmp[0];
-		if(f == '+')
+		QString f = QString(tmp[0]);
+		if(f == "+") // ☑
 		{
 			node->addAnswer(tmp.remove(0, 2), 1);
 		}
@@ -182,9 +182,9 @@ void DlgAddTask::on_btnCloseAddAnsw_clicked()
 {
 	QString str = "";
 	if(ui->chbCloseReal->isChecked())
-		str = "+ ";
+		str = "+ "; // ☑
 	else
-		str = "- ";
+		str = "- "; // ☐
 	str += ui->leCloseAnswer->text();
 	ui->lwCloseAnswers->addItem(str);
 	ui->leCloseAnswer->clear();

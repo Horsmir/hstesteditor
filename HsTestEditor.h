@@ -4,12 +4,15 @@
 #include <QtGui/QMainWindow>
 #include <QtGui/QMessageBox>
 #include <QtGui/QPrinter>
+#include <QtCore/QSettings>
+#include <QtGui/QCloseEvent>
 #include "ui_mainwindow.h"
 #include "testmanager.h"
 #include "dlgcreatetest.h"
 #include "dlgaddtask.h"
 #include "htmltemplate.h"
 #include "dlgfind.h"
+#include "dlgsetting.h"
 
 namespace Ui
 {
@@ -22,6 +25,9 @@ class HsTestEditor : public QMainWindow
 public:
 	explicit HsTestEditor(const QString & testFilePath = "", QWidget *parent = 0, Qt::WindowFlags flags = 0);
 	virtual ~HsTestEditor();
+	
+protected:
+	void closeEvent(QCloseEvent *event);
 
 private slots:
 	void on_actionExit_triggered();
@@ -35,6 +41,8 @@ private slots:
 	void on_actionToPDF_triggered();
 	void on_actionToText_triggered();
 	void on_actionFind_triggered();
+	void on_actionSaveAs_triggered();
+	void on_actionSetting_triggered();
 	
 	void findTextNext(const QString &str, Qt::CaseSensitivity cs);
 	void findTextPrev(const QString &str, Qt::CaseSensitivity cs);
@@ -48,10 +56,17 @@ private:
 	DlgCreateTest *createTestDialog;
 	DlgAddTask *addTaskDialog;
 	DlgFind *findDialog;
+	DlgSetting *settingDialog;
 	HtmlTemplate *htmlTemplate;
+	QSettings *settings;
+	QString appStyle;
+	QString defaultAuthor;
+	QString defaultProjectDirPath;
 	
 	void showTree();
 	void showTest();
+	void readSettings();
+	void writeSettings();
 };
 
 #endif // HsTestEditor_H

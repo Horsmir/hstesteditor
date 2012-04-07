@@ -17,38 +17,39 @@
 */
 
 
-#ifndef DLGCREATETEST_H
-#define DLGCREATETEST_H
+#ifndef DLGSETTING_H
+#define DLGSETTING_H
 
 #include <QtGui/QDialog>
-#include <QtCore/QDir>
+#include <QtGui/QStyleFactory>
 #include <QtGui/QFileDialog>
-#include "ui_dlgcreatetest.h"
+#include "ui_dlgsetting.h"
 
 namespace Ui {
-	class DlgCreateTest;
+	class DlgSetting;
 }
 
-class DlgCreateTest : public QDialog
+class DlgSetting : public QDialog
 {
 	Q_OBJECT
 	
 public:
-	explicit DlgCreateTest(QWidget *parent = 0, Qt::WindowFlags f = 0);
-	virtual ~DlgCreateTest();
-	
-	QString getTestName() const;
-	QString getTestDir() const;
-	QString getAuthor() const;
+	explicit DlgSetting(QWidget *parent = 0, Qt::WindowFlags f = 0);
+	virtual ~DlgSetting();
 	
 	void setAuthor(const QString &author);
 	void setDir(const QString &dir);
+	void setTheme(const QString &theme);
+	
+	QString getAuthor() const;
+	QString getDir() const;
+	QString getTheme() const;
 	
 private slots:
-	void on_toolBtnTestDir_clicked();
+	void on_btnDir_clicked();
 	
 private:
-	Ui::DlgCreateTest *ui;
+	Ui::DlgSetting *ui;
 };
 
-#endif // DLGCREATETEST_H
+#endif // DLGSETTING_H

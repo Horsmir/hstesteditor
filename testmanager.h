@@ -38,6 +38,7 @@ public:
 	void createTest(const QString &testName, const QString &testAuthor, const QString &testFileName);
 	void openTest(const QString &testFileName);
 	void saveTest();
+	void saveTest(const QString &testFilePath);
 	
 	void addTestNode(TestNode testNode);
 	

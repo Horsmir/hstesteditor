@@ -10,8 +10,8 @@ find_package(Qt4 REQUIRED)
 
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
-set(HsTestEditor_SRCS dlgfind.cpp htmltemplate.cpp dlgaddtask.cpp dlgcreatetest.cpp testnode.cpp test.cpp testmanager.cpp HsTestEditor.cpp main.cpp)
-set(HsTestEditor_UIS dlgaddtask.ui dlgcreatetest.ui mainwindow.ui)
+set(HsTestEditor_SRCS dlgsetting.cpp dlgfind.cpp htmltemplate.cpp dlgaddtask.cpp dlgcreatetest.cpp testnode.cpp test.cpp testmanager.cpp HsTestEditor.cpp main.cpp)
+set(HsTestEditor_UIS dlgsetting.ui dlgaddtask.ui dlgcreatetest.ui mainwindow.ui)
 set(HsTestEditor_QRCS hstesteditor.qrc)
 
 qt4_automoc(${HsTestEditor_SRCS})

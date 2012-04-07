@@ -200,3 +200,17 @@ void TestManager::testToText(const QString &textFileName)
 		}
 	}
 }
+
+void TestManager::saveTest(const QString &testFilePath)
+{
+	QFile file(testFilePath);
+	if(!file.open(QIODevice::WriteOnly))
+	{
+		qDebug() << "Can't open file " << testFilePath << " for writing. " << file.errorString();
+		return;
+	}
+	
+	QDataStream out(&file);
+	out << quint32(magicNumber) << quint16(out.version());
+	out << *currentTest;
+}

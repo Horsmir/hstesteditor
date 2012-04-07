@@ -17,7 +17,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>3</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="pageFirst">
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -167,7 +167,13 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
-          <widget class="QListWidget" name="lwCloseAnswers"/>
+          <widget class="QListWidget" name="lwCloseAnswers">
+           <property name="font">
+            <font>
+             <family>Droid Sans</family>
+            </font>
+           </property>
+          </widget>
          </item>
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_4">
