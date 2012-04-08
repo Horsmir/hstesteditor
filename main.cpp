@@ -9,7 +9,7 @@ int main(int argc, char** argv)
 	QString openFile = "";
 	
 	app.setApplicationName("Hs Test Editor");
-	app.setApplicationVersion("0.1");
+	app.setApplicationVersion("0.2");
 	
 	QTranslator qtTranslator;
 	qtTranslator.load("qt_" + QLocale::system().name(), "/usr/share/qt/translations");
