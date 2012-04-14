@@ -47,6 +47,7 @@ public:
 	void setNodeList(const QList<TestNode> &nodeList);
 
 	void addNode(const TestNode &test_node);
+	bool delNode(int index);
 
 	QString getName() const;
 	QString getAuthor() const;

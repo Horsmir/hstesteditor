@@ -214,3 +214,8 @@ void TestManager::saveTest(const QString &testFilePath)
 	out << quint32(magicNumber) << quint16(out.version());
 	out << *currentTest;
 }
+
+bool TestManager::delTestNode(int index)
+{
+  return currentTest->delNode(index);
+}

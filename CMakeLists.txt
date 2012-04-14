@@ -18,7 +18,7 @@ qt4_automoc(${HsTestEditor_SRCS})
 QT4_WRAP_UI(UI_HEADERS ${HsTestEditor_UIS})
 QT4_ADD_RESOURCES(QRC_SOURCES ${HsTestEditor_QRCS})
 
-add_executable(hstesteditor ${HsTestEditor_SRCS} ${UI_HEADERS} ${QRC_SOURCES})
+add_executable(hstesteditor WIN32 ${HsTestEditor_SRCS} ${UI_HEADERS} ${QRC_SOURCES})
 target_link_libraries(hstesteditor ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
 
 install(TARGETS hstesteditor DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)

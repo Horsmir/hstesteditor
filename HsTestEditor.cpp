@@ -36,6 +36,8 @@ HsTestEditor::HsTestEditor(const QString &testFilePath, QWidget *parent, Qt::Win
 	settings = new QSettings(QSettings::NativeFormat, QSettings::UserScope, "HsTest", "hstesteditor");
 	readSettings();
 	
+	ui->twStruct->setContextMenuPolicy(Qt::CustomContextMenu);
+	
 	connect(findDialog, SIGNAL(findNext(QString,Qt::CaseSensitivity)), SLOT(findTextNext(QString,Qt::CaseSensitivity)));
 	connect(findDialog, SIGNAL(findPrev(QString,Qt::CaseSensitivity)), SLOT(findTextPrev(QString,Qt::CaseSensitivity)));
 }
@@ -361,6 +363,39 @@ void HsTestEditor::on_actionSetting_triggered()
 		qApp->setStyle(appStyle);
 		writeSettings();
 	}
+}
+
+void HsTestEditor::on_actionDelTask_triggered()
+{
+	if(!testManager->delTestNode(ui->twStruct->currentItem()->text(0).toInt() - 1))
+	{
+		QMessageBox::critical(this, trUtf8("Удаление задания"), trUtf8("Невозможно удалить задание №") + ui->twStruct->currentItem()->text(0));
+		return;
+	}
+	showTree();
+	showTest();
+}
+
+void HsTestEditor::on_actionEditTask_triggered()
+{
+	on_twStruct_itemDoubleClicked(ui->twStruct->currentItem(), 0);
+}
+
+void HsTestEditor::on_twStruct_customContextMenuRequested(const QPoint &pos)
+{
+	ui->actionDelTask->setEnabled(true);
+	ui->actionEditTask->setEnabled(true);
+	QMenu menu(ui->twStruct);
+	menu.addAction(ui->actionAddTask);
+	menu.addAction(ui->actionEditTask);
+	menu.addAction(ui->actionDelTask);
+	menu.exec(QCursor::pos());
+}
+
+void HsTestEditor::on_twStruct_itemActivated()
+{
+	ui->actionDelTask->setEnabled(true);
+	ui->actionEditTask->setEnabled(true);
 }
 
 #include "HsTestEditor.moc"

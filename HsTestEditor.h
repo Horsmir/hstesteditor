@@ -38,11 +38,15 @@ private slots:
 	void on_actionSave_triggered();
 	void on_twStruct_itemDoubleClicked(QTreeWidgetItem * item, int column);
 	void on_twStruct_itemClicked(QTreeWidgetItem * item, int column);
+	void on_twStruct_customContextMenuRequested(const QPoint & pos);
+	void on_twStruct_itemActivated();
 	void on_actionToPDF_triggered();
 	void on_actionToText_triggered();
 	void on_actionFind_triggered();
 	void on_actionSaveAs_triggered();
 	void on_actionSetting_triggered();
+	void on_actionDelTask_triggered();
+	void on_actionEditTask_triggered();
 	
 	void findTextNext(const QString &str, Qt::CaseSensitivity cs);
 	void findTextPrev(const QString &str, Qt::CaseSensitivity cs);

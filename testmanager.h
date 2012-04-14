@@ -41,6 +41,7 @@ public:
 	void saveTest(const QString &testFilePath);
 	
 	void addTestNode(TestNode testNode);
+	bool delTestNode(int index);
 	
 	quint32 getCount() const;
 	const TestNode *getNodeById(quint32 index) const;

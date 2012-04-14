@@ -354,6 +354,15 @@ TestNode *Test::getNodePtrForChange(quint32 index)
 	return &(nodeList[index]);
 }
 
+bool Test::delNode(int index)
+{
+	if(index >= nodeList.count())
+		return false;
+	nodeList.removeAt(index);
+	count--;
+	return true;
+}
+	
 //===============================================================================================//
 
 QDataStream &operator << (QDataStream &out, const Test &test)

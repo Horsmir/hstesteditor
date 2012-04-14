@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="/">
+    <file>icons/edit-task.png</file>
+    <file>icons/del-task.png</file>
     <file>icons/document-save-as.png</file>
     <file>icons/edit-find.png</file>
     <file>icons/chboff.png</file>

@@ -79,6 +79,10 @@
     <property name="title">
      <string>Пр&amp;авка</string>
     </property>
+    <addaction name="actionAddTask"/>
+    <addaction name="actionEditTask"/>
+    <addaction name="actionDelTask"/>
+    <addaction name="separator"/>
     <addaction name="actionFind"/>
     <addaction name="separator"/>
     <addaction name="actionSetting"/>
@@ -147,6 +151,8 @@
    <addaction name="actionSaveAs"/>
    <addaction name="separator"/>
    <addaction name="actionAddTask"/>
+   <addaction name="actionEditTask"/>
+   <addaction name="actionDelTask"/>
    <addaction name="separator"/>
    <addaction name="actionToText"/>
    <addaction name="actionToPDF"/>
@@ -332,6 +338,39 @@
    </property>
    <property name="text">
     <string>Параметры...</string>
+   </property>
+  </action>
+  <action name="actionDelTask">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="hstesteditor.qrc">
+     <normaloff>:/icons/del-task.png</normaloff>:/icons/del-task.png</iconset>
+   </property>
+   <property name="text">
+    <string>Удалить задание</string>
+   </property>
+   <property name="toolTip">
+    <string>Удалить задание</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
+   </property>
+  </action>
+  <action name="actionEditTask">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="hstesteditor.qrc">
+     <normaloff>:/icons/edit-task.png</normaloff>:/icons/edit-task.png</iconset>
+   </property>
+   <property name="text">
+    <string>Изменить задание...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
    </property>
   </action>
  </widget>
